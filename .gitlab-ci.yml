@@ -1,0 +1,29 @@
+stages:
+  - build_and_test
+  - containerize
+  # is something missing here?
+
+build_and_test:
+  stage: build_and_test
+  # specify a suitable image where npm is available
+  script:
+    - npm install
+    # test the application
+
+containerize:
+  stage: containerize
+  image: docker:latest
+  services:
+    - docker:dind
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    # build and tag the image (refer to the gitlab container registry for the correct tagname)
+    # push the image to the gitlab container registry
+
+deploy:
+  stage: deploy
+  script:
+    - echo "Deploy to Azure App Service"
+  environment:
+    # define the environment name
+    # define the environment url
