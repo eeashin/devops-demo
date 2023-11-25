@@ -29,6 +29,8 @@ deploy:
   stage: deploy
   script:
     - echo "Deploy to Azure App Service"
-  #environment:
+  environment:
+    name: production-environment
+    url: https://eashin-devops.azurewebsites.net
     # define the environment name
     # define the environment url
