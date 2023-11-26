@@ -2,16 +2,13 @@ stages:
   - build_and_test
   - containerize
   - deploy
-  # is something missing here?
 
 build_and_test:
   stage: build_and_test
-  # specify a suitable image where npm is available
   image: node:12
   script:
     - npm install
     - npm run test
-    # test the application
 
 containerize:
   stage: containerize
@@ -22,8 +19,6 @@ containerize:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - docker build -t registry.gitlab.com/eeashin/lut-devops-assignment .
     - docker push registry.gitlab.com/eeashin/lut-devops-assignment
-    # build and tag the image (refer to the gitlab container registry for the correct tagname)
-    # push the image to the gitlab container registry
 
 deploy:
   stage: deploy
@@ -32,5 +27,3 @@ deploy:
   environment:
     name: production-environment
     url: https://eashin-devops.azurewebsites.net
-    # define the environment name
-    # define the environment url
